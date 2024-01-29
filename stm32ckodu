@@ -15,7 +15,7 @@ void adcoku() //ADC nin tanımlandığı fonksiyon
 {
  sConfigPrivate.Rank = ADC_REGULAR_RANK_1;
  sConfigPrivate.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-sConfigPrivate.Channel = ADC_CHANNEL_0;
+sConfigPrivate.Channel = ADC_CHANNEL_0; //
  HAL_ADC_ConfigChannel(&hadc1, &sConfigPrivate);
  HAL_ADC_Start(&hadc1);
  HAL_ADC_PollForConversion(&hadc1,1000);
@@ -28,7 +28,7 @@ değerinin depolandığı değişken
  HAL_ADC_PollForConversion(&hadc1,1000);
  akimoku = HAL_ADC_GetValue(&hadc1);//A1 pininden okunan gerilim 
 değerinin depolandığı değişken
- HAL_ADC_Stop(&hadc1);
+ HAL_ADC_Stop(&hadc1); /* Tanımlanan hadc1 isimli ADC okuyucu durdurulsun çünkü başka veri alınmasın.
 }
 /* USER CODE END 0 */
 /**
