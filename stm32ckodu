@@ -4,17 +4,18 @@ uint32_t gerilimoku; //Kanal 0 (A0) üzerinden okunan ADC sinyalinin sayısal
 değerinin depolanacağı değişken.
 uint32_t akimoku;//Kanal 1 (A1) üzerinden okunan ADC sinyalinin sayısal değerinin 
 depolanacağı değişken.
-ADC_ChannelConfTypeDef sConfigPrivate = {0};
+ADC_ChannelConfTypeDef sConfigPrivate = {0}; // STRUCT tanımlanıyor bu struct içerisinde ADC parametrelerini içeriyor. 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+//Programın ayarladığı default ayarlar, örneğin sistem saati, giriş ve çıkışlar ve analog sayısal dönüştürücü fonksiyonu
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 
 void adcoku() //ADC nin tanımlandığı fonksiyon
 {
- sConfigPrivate.Rank = ADC_REGULAR_RANK_1;
- sConfigPrivate.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+ sConfigPrivate.Rank = ADC_REGULAR_RANK_1; // Daha önceden tanımlanan struct rank elemanı çağrılıyor bunun nedeni ADC Rank1 de okunacak
+ sConfigPrivate.SamplingTime = ADC_SAMPLETIME_1CYCLE_5; //TADC = TSAMPLİNG + TCONVERSİON olursa TSAMPLİNG = 5 cycle  oluyor. TSAMPLİNG ne kadar küçük ise, TADC o kadar küçülür.
 sConfigPrivate.Channel = ADC_CHANNEL_0; //
  HAL_ADC_ConfigChannel(&hadc1, &sConfigPrivate);
  HAL_ADC_Start(&hadc1);
